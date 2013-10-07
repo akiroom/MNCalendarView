@@ -41,6 +41,7 @@
   self.calendar   = NSCalendar.currentCalendar;
   self.fromDate   = [NSDate.date mn_beginningOfDay:self.calendar];
   self.toDate     = [self.fromDate dateByAddingTimeInterval:MN_YEAR * 4];
+  self.selectedDates = [[NSMutableSet alloc] init];
   self.daysInWeek = 7;
   
   self.headerViewClass  = MNCalendarHeaderView.class;
@@ -266,7 +267,9 @@
     [cell setEnabled:[self dateEnabled:date]];
   }
 
-  if (self.selectedDate && cell.enabled) {
+  if (_shouldMultipleSelect && self.selectedDates && cell.enabled) {
+    [cell setSelected:[_selectedDates containsObject:cell.date]];
+  } else if (_selectedDate && cell.enabled) {
     [cell setSelected:[date isEqualToDate:self.selectedDate]];
   }
   
@@ -289,6 +292,13 @@
   if ([cell isKindOfClass:MNCalendarViewDayCell.class] && cell.enabled) {
     MNCalendarViewDayCell *dayCell = (MNCalendarViewDayCell *)cell;
     
+    if (_shouldMultipleSelect) {
+      if ([self.selectedDates containsObject:dayCell.date]) {
+        [self.selectedDates removeObject:dayCell.date];
+      } else {
+        [self.selectedDates addObject:dayCell.date];
+      }
+    }
     self.selectedDate = dayCell.date;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(calendarView:didSelectDate:)]) {
