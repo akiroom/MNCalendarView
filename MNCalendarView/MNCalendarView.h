@@ -28,6 +28,7 @@
 @property(nonatomic,copy) NSDate *selectedDate;
 @property(nonatomic, strong) NSMutableSet *selectedDates;
 @property(nonatomic) BOOL shouldMultipleSelect;
+@property(nonatomic, getter = isHiddenTodayIndicator) BOOL hiddenTodayIndicator;
 
 @property(nonatomic,strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR; // default is the standard separator gray
 
