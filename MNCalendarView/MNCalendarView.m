@@ -177,6 +177,21 @@
    ];
 }
 
+- (BOOL)dateIsVisibility:(NSDate *)date monthDate:(NSDate *)monthDate {
+  NSDateComponents *dateComponents =
+  [self.calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+                   fromDate:date];
+  NSDateComponents *monthComponents =
+  [self.calendar components:NSMonthCalendarUnit
+                   fromDate:monthDate];
+  NSInteger targetMonth = [dateComponents month];
+  NSInteger month = [monthComponents month];
+  if (targetMonth == month) {
+    return YES;
+  }
+  return NO;
+}
+
 - (BOOL)dateEnabled:(NSDate *)date {
   if (self.delegate && [self.delegate respondsToSelector:@selector(calendarView:shouldSelectDate:)]) {
     return [self.delegate calendarView:self shouldSelectDate:date];
@@ -275,6 +290,14 @@
 
   if (cell.enabled) {
     [cell setEnabled:[self dateEnabled:date]];
+  }
+
+  if (self.displaysDaysOfOtherMonths) {
+    if ([self dateIsVisibility:date monthDate:monthDate]) {
+      [cell setIsVisibility:YES];
+    } else {
+      [cell setIsVisibility:NO];
+    }
   }
 
   if (_shouldMultipleSelect && self.selectedDates && cell.enabled) {
