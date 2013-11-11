@@ -54,8 +54,9 @@ NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentif
 }
 
 - (void)setIsVisibility:(BOOL)isVisibility {
+  _isVisibility = isVisibility;
   self.titleLabel.textColor =
-  self.enabled ? UIColor.darkTextColor : (isVisibility ? UIColor.lightGrayColor : self.backgroundColor);
+      self.enabled ? UIColor.darkTextColor : (self.isVisibility ? UIColor.lightGrayColor : self.backgroundColor);
 }
 
 - (void)drawRect:(CGRect)rect {
