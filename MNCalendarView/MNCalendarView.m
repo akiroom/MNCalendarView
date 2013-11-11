@@ -277,6 +277,19 @@
     [cell setEnabled:[self dateEnabled:date]];
   }
 
+  if (self.displaysDaysOfOtherMonths) {
+    NSInteger firstmonth = [components month] + 1;
+    NSDateComponents *dateComponents =
+        [self.calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+                         fromDate:date];
+    NSInteger nowMonth = [dateComponents month];
+    if (firstmonth == nowMonth) {
+      [cell setIsVisibility:YES];
+    } else {
+      [cell setIsVisibility:NO];
+    }
+  }
+
   if (_shouldMultipleSelect && self.selectedDates && cell.enabled) {
     [cell setSelected:[_selectedDates containsObject:cell.date]];
   } else if (_selectedDate && cell.enabled) {
