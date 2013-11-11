@@ -294,9 +294,9 @@
 
   if (self.displaysDaysOfOtherMonths) {
     if ([self dateIsVisibility:date monthDate:monthDate]) {
-      [cell setIsVisibility:YES];
+      [cell setVisible:YES];
     } else {
-      [cell setIsVisibility:NO];
+      [cell setVisible:NO];
     }
   }
 
