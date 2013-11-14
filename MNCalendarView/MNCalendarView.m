@@ -106,6 +106,14 @@
   _selectedDate = [selectedDate mn_beginningOfDay:self.calendar];
 }
 
+- (void)setSelectedDates:(NSMutableSet *)selectedDates{
+  NSMutableSet *newSet = [NSMutableSet set];
+  for (NSDate *date in selectedDates) {
+    [newSet addObject:[date mn_beginningOfDay:self.calendar]];
+  }
+  _selectedDates = newSet;
+}
+
 - (void)reloadData {
   NSMutableArray *monthDates = @[].mutableCopy;
   MNFastDateEnumeration *enumeration =
