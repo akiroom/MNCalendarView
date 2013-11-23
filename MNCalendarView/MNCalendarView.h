@@ -37,6 +37,10 @@
 @property(nonatomic,strong) Class weekdayCellClass;
 @property(nonatomic,strong) Class dayCellClass;
 
+- (void)scrollToDate:(NSDate *)date;
+- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
+- (void)selectDate:(NSDate *)date animated:(BOOL)animated;
+
 - (void)reloadData;
 - (void)registerUICollectionViewClasses; 
 
