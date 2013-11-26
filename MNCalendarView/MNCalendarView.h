@@ -30,6 +30,7 @@
 @property(nonatomic) BOOL shouldMultipleSelect;
 @property(nonatomic) BOOL displaysDaysOfOtherMonths;
 @property(nonatomic, getter = isHiddenTodayIndicator) BOOL hiddenTodayIndicator;
+@property(nonatomic) BOOL isReadOnly;
 
 @property(nonatomic,strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR; // default is the standard separator gray
 

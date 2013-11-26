@@ -43,6 +43,7 @@
   self.toDate     = [self.fromDate dateByAddingTimeInterval:MN_YEAR * 4];
   self.selectedDates = [[NSMutableSet alloc] init];
   self.daysInWeek = 7;
+  self.isReadOnly = NO;
   
   self.headerViewClass  = MNCalendarHeaderView.class;
   self.weekdayCellClass = MNCalendarViewWeekdayCell.class;
@@ -373,6 +374,10 @@
   } else if (_selectedDate && cell.enabled) {
     [cell setSelected:[date isEqualToDate:self.selectedDate]];
   }
+    
+    if (_isReadOnly) {
+        cell.userInteractionEnabled = NO;
+    }
   
   return cell;
 }
